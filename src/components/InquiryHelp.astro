@@ -1,0 +1,93 @@
+---
+import { Plus } from "lucide-astro";
+import { sessions } from "../lib/demo";
+const preparation = [
+  [
+    "Your people",
+    "Who is coming, what you’re celebrating, and any practical preferences that would help everyone feel at ease.",
+  ],
+  [
+    "Your timing",
+    "A preferred season or date, your location ideas, and any deadline for receiving or using the photographs.",
+  ],
+  [
+    "Your priorities",
+    "Where the images will live, a comfortable budget range, and a favorite portfolio story. Rough ideas are welcome.",
+  ],
+];
+const questions = [
+  [
+    "What if I’m not sure which session fits?",
+    "Choose the closest match and explain your idea in the notes. For example, a portrait for a business website may fit a brand session; a personal milestone may fit portraits. Nothing is locked in by this demo.",
+  ],
+  [
+    "Do I need a location or a fixed date?",
+    "A town, a preferred setting, or “I’d like location guidance” is enough to start. The date is optional, and you can describe a season or a deadline instead.",
+  ],
+  [
+    "What would be agreed before booking?",
+    "A live studio would confirm availability, scope, price, image delivery, usage rights, and rescheduling terms in writing. This concept site does not take bookings or payments.",
+  ],
+  [
+    "Will someone reply to this form?",
+    "No. This is a fictional studio: Preview your inquiry creates an on-page summary only. Nothing is sent or saved, so please use sample details.",
+  ],
+];
+---
+
+<section class="preparation">
+  <div class="wrap">
+    <p class="eyebrow">A LITTLE PREPARATION</p>
+    <h2>
+      Bring an idea.
+      <br />
+      <em>Not a finished plan.</em>
+    </h2>
+    <div class="preparation-grid">
+      {preparation.map(([title, copy]) => (
+        <article>
+          <h3>{title}</h3>
+          <p>{copy}</p>
+        </article>
+      ))}
+    </div>
+    <a class="button" href="#inquiry">
+      Start with what you know
+    </a>
+  </div>
+</section>
+<section class="session-intro wrap" aria-labelledby="inquiry-session-heading">
+  <div>
+    <p class="eyebrow">FIND YOUR STARTING POINT</p>
+    <h2 id="inquiry-session-heading">Which story is yours?</h2>
+    <p>Explore the details of each session before completing your inquiry.</p>
+  </div>
+  <nav aria-label="Compare photography sessions">
+    {sessions.map((session) => (
+      <a href={`/sessions/${session.id}/`}>
+        <span aria-hidden="true">{session.number}</span>
+        {session.name}
+      </a>
+    ))}
+  </nav>
+</section>
+<div class="faq-band">
+  <section class="faq wrap" aria-labelledby="inquiry-faq-heading">
+    <div>
+      <p class="eyebrow">BEFORE YOU BEGIN</p>
+      <h2 id="inquiry-faq-heading">A little clarity.</h2>
+      <p>You don’t need all the answers to take the first step.</p>
+    </div>
+    <div>
+      {questions.map(([question, answer]) => (
+        <details>
+          <summary>
+            {question}
+            <Plus size={18} aria-hidden="true" />
+          </summary>
+          <p>{answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+</div>

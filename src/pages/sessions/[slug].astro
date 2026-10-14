@@ -1,0 +1,171 @@
+---
+import { Check, Clock, MessageCircle, Plus } from "lucide-astro";
+import Layout from "../../layouts/Layout.astro";
+import Closing from "../../components/Closing.astro";
+import SessionGuide from "../../components/SessionGuide.astro";
+import { sessionDetails } from "../../lib/session-details";
+export function getStaticPaths() {
+  return sessionDetails.map((session) => ({
+    params: { slug: session.id },
+    props: { session },
+  }));
+}
+const { session } = Astro.props;
+const inquiry = `/inquire/?session=${session.id}`;
+---
+
+<Layout
+  inquiry={inquiry}
+  title={`${session.name} — Alder House`}
+  description={session.description}
+>
+  <section class="session-hero wrap">
+    <div>
+      <a class="text-link" href="/experience/">
+        All sessions
+      </a>
+      <p class="eyebrow">{session.name}</p>
+      <h1>{session.headline}</h1>
+      <p class="lead">{session.audience}</p>
+      <a class="button" href={inquiry}>
+        <MessageCircle size={18} aria-hidden="true" /> Plan this session
+      </a>
+      <p class="small">
+        A conversation first. No booking or payment in this demo.
+      </p>
+    </div>
+    <figure class="hero-photo session-photo">
+      <img
+        src={`/images/${session.image}.jpg`}
+        alt={`${session.name} inspiration from the Alder House sample portfolio`}
+        width="1000"
+        height="1200"
+      />
+      <img
+        class="hero-stamp"
+        src="/brand/stamp.svg"
+        alt=""
+        width="160"
+        height="160"
+        aria-hidden="true"
+      />
+    </figure>
+  </section>
+  <section class="detail-section wrap">
+    <div>
+      <p class="eyebrow">A THOUGHTFUL STARTING POINT</p>
+      <h2>
+        What we would
+        <br />
+        <em>plan together.</em>
+      </h2>
+      <p class="timing">
+        <Clock size={18} aria-hidden="true" />
+        {session.timing}
+      </p>
+      <p>
+        These are sample session outlines, not a fixed package or live offer. A
+        real proposal would confirm coverage, fees, image count, usage rights,
+        and delivery timing.
+      </p>
+    </div>
+    <ul class="included-list">
+      {session.included.map((item) => (
+        <li>
+          <Check size={18} aria-hidden="true" />
+          {item}
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section class="preparation">
+    <div class="wrap">
+      <p class="eyebrow">BEFORE THE CAMERA COMES OUT</p>
+      <h2>
+        Feel ready.
+        <br />
+        <em>Stay yourself.</em>
+      </h2>
+      <div class="preparation-grid">
+        <article>
+          <h3>What to bring</h3>
+          <p>{session.wardrobe}</p>
+        </article>
+        <article>
+          <h3>Where to begin</h3>
+          <p>{session.location}</p>
+        </article>
+        <article>
+          <h3>What to share</h3>
+          <p>
+            Tell us about your priorities, anything that would help you feel
+            comfortable, and photographs you are drawn to. Please avoid sending
+            sensitive personal information through this demo.
+          </p>
+        </article>
+      </div>
+      <a class="text-link" href={inquiry}>
+        Share your session ideas
+      </a>
+    </div>
+  </section>
+  <SessionGuide href={inquiry} />
+  <div class="faq-band">
+    <section class="faq wrap">
+      <div class="faq-heading">
+        <p class="eyebrow">YOUR QUESTIONS</p>
+        <h2>A little clarity.</h2>
+      </div>
+      <div class="faq-questions">
+        <details>
+          <summary>
+            {session.question}
+            <Plus size={18} aria-hidden="true" />
+          </summary>
+          <p>{session.answer}</p>
+        </details>
+        <details>
+          <summary>
+            How is the investment decided?
+            <Plus size={18} aria-hidden="true" />
+          </summary>
+          <p>
+            A real quote would reflect the session length, location, travel,
+            editing, and intended image use. Share your budget range in the
+            inquiry so the scope can be discussed openly. This demo does not
+            offer pricing or take payments.
+          </p>
+        </details>
+        <details>
+          <summary>
+            What happens if plans change?
+            <Plus size={18} aria-hidden="true" />
+          </summary>
+          <p>
+            Weather alternatives, rescheduling, cancellation, and image delivery
+            would be agreed in writing before any live booking. The demo does
+            not create a booking or contract.
+          </p>
+        </details>
+      </div>
+    </section>
+  </div>
+  <section class="inline-invitation wrap">
+    <div>
+      <h2>Picture your own version.</h2>
+      <p>A few details are enough to start shaping a session around you.</p>
+    </div>
+    <a class="button" href={inquiry}>
+      Start my{" "}
+      {session.id === "families"
+        ? "family"
+        : session.id === "brands"
+          ? "brand"
+          : session.id === "portraits"
+            ? "portrait"
+            : "celebration"}{" "}
+      inquiry
+    </a>
+  </section>
+  <Closing inquiry={inquiry} />
+</Layout>

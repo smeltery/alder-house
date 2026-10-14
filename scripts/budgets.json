@@ -1,0 +1,10 @@
+{
+  "total_lines": 8150,
+  "default_lines": 250,
+  "files": {
+    "src/styles/global.css": 650,
+    "src/styles/chrome.css": 300,
+    "src/styles/editorial.css": 400
+  },
+  "default_files": 15
+}

@@ -1,0 +1,75 @@
+#mobile-nav[open] {
+  display: flex;
+  flex-direction: column;
+}
+#mobile-nav > * {
+  flex-shrink: 0;
+}
+#mobile-nav .menu-heading {
+  position: sticky;
+  top: -28px;
+  z-index: 1;
+  background: var(--paper);
+  padding-block: 12px;
+}
+.menu-planning {
+  margin-top: 24px;
+  padding: 20px;
+  background: #e9ece2;
+}
+.menu-planning .eyebrow {
+  font-size: 10px;
+  margin-bottom: 8px;
+}
+.menu-planning a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-block: 12px;
+  font-size: 14px;
+}
+.menu-planning a + a {
+  border-top: 1px solid var(--line);
+}
+.menu-planning a:hover span {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.menu-signature {
+  margin-top: auto;
+  padding-top: 36px;
+  text-align: center;
+}
+.menu-signature img {
+  display: block;
+  width: clamp(80px, 12dvh, 120px);
+  height: auto;
+  margin: 0 auto 16px;
+}
+.menu-signature p {
+  font-size: 13px;
+}
+.menu-signature .text-link {
+  font-size: 12px;
+  margin-top: 12px;
+}
+#mobile-nav .menu-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+@media (max-height: 850px) {
+  #mobile-nav .menu-intro {
+    font-size: 30px;
+    margin-block: 20px;
+  }
+  #mobile-nav nav a {
+    padding-block: 14px;
+    font-size: 16px;
+  }
+  .menu-planning {
+    margin-top: 20px;
+    padding: 16px;
+  }
+  .menu-signature {
+    padding-top: 24px;
+  }
+}

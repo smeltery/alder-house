@@ -1,0 +1,249 @@
+.planning-library,
+.planning-workspace {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 64px;
+}
+.planning-library article,
+.planning-result {
+  background: #e9ece2;
+  padding: clamp(24px, 4vw, 48px);
+}
+.planning-library h2,
+.planning-result h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  margin-block: 16px;
+}
+.planning-library .eyebrow {
+  margin-top: 24px;
+}
+.planning-library .button {
+  margin-top: 24px;
+}
+.planning-workspace {
+  align-items: start;
+}
+.planning-workspace form {
+  border: 1px solid var(--line);
+  padding: 28px;
+}
+.planning-workspace form .field {
+  margin-bottom: 24px;
+}
+.planning-workspace form .small {
+  margin-top: 20px;
+}
+.planning-workspace form button[type="reset"] {
+  margin-left: 14px;
+}
+#plan-summary dt {
+  font-size: 12px;
+  margin-top: 20px;
+  color: var(--muted);
+}
+#plan-summary dd {
+  margin-top: 4px;
+}
+#plan-actions .button,
+#plan-actions .text-link {
+  margin-top: 24px;
+}
+#plan-actions .text-link {
+  display: table;
+}
+@media (max-width: 760px) {
+  .planning-library,
+  .planning-workspace {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+.tool-back {
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 4px;
+}
+.tool-back:hover {
+  background: #e9ece2;
+  color: var(--ink);
+}
+.tools-intro {
+  padding-bottom: 32px;
+}
+.tool-directory {
+  padding-bottom: 24px;
+}
+.tool-directory-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.tool-directory h2 {
+  font-size: 32px;
+  margin-top: 8px;
+}
+.tool-directory-heading > p {
+  max-width: 28ch;
+}
+.tool-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tool-filters[hidden],
+.planning-library article[hidden] {
+  display: none;
+}
+.tool-filters button {
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  border-radius: 4px;
+}
+.tool-filters button[aria-pressed="true"] {
+  background: var(--ink);
+  color: white;
+}
+.planning-library article {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border: 1px solid var(--line);
+}
+.planning-library article:nth-child(even) {
+  background: #efe9df;
+}
+.planning-library article > p:last-of-type {
+  flex: 1;
+}
+#creative-list,
+#preparation-list {
+  padding-left: 20px;
+  margin-block: 24px;
+}
+#creative-list li,
+#preparation-list li {
+  padding-block: 8px;
+}
+#palette {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+#palette span {
+  flex: 1;
+  padding-top: 8px;
+  font-size: 13px;
+}
+#creative-inquiry[hidden],
+#preparation-inquiry[hidden] {
+  display: none;
+}
+@media (max-width: 760px) {
+  .tool-directory-heading {
+    display: block;
+  }
+  .tool-directory-heading > p {
+    margin-top: 12px;
+    max-width: none;
+  }
+}
+#tool-count {
+  margin-top: 12px;
+}
+.tool-jumps {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 24px;
+}
+.tool-jumps a {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+:is(.planning-workspace form, #creative-tool, #using-this-tool) {
+  scroll-margin-top: 110px;
+}
+.tool-guidance {
+  background: #e9ece2;
+  padding-block: 48px;
+}
+.tool-guide-heading {
+  max-width: 720px;
+}
+.tool-guide-heading h2 {
+  font-size: clamp(30px, 4vw, 44px);
+  margin-block: 12px;
+}
+.tool-guide-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-block: 32px;
+}
+.tool-guide-steps article {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.tool-guide-steps h3,
+.tool-example h3 {
+  font-size: 24px;
+  margin-block: 8px;
+}
+.tool-example {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  background: var(--paper);
+}
+.tool-example > svg {
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+.tool-question {
+  margin-top: 24px;
+  border-block: 1px solid var(--line);
+}
+.tool-question summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 20px;
+  cursor: pointer;
+  list-style: none;
+}
+.tool-question summary::-webkit-details-marker {
+  display: none;
+}
+.tool-question p {
+  max-width: 80ch;
+  padding-bottom: 20px;
+}
+.tool-question[open] summary svg {
+  transform: rotate(180deg);
+}
+@media (max-width: 760px) {
+  .tool-guide-steps {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+#preparation-list label {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  cursor: pointer;
+}
+#preparation-list input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  accent-color: var(--ink);
+}

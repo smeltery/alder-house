@@ -1,0 +1,250 @@
+---
+import { MessageCircle, Check } from "lucide-astro";
+import InquiryHelp from "../components/InquiryHelp.astro";
+import Layout from "../layouts/Layout.astro";
+import SessionGuide from "../components/SessionGuide.astro";
+import FormField from "../components/FormField.astro";
+import { sessions } from "../lib/demo";
+---
+
+<Layout title="Plan your session — Alder House">
+  <section class="inquiry wrap section">
+    <div class="inquiry-intro">
+      <p class="eyebrow">LET’S MAKE IT PERSONAL</p>
+      <h1>
+        Your ideas.
+        <br />
+        <em>Our starting point.</em>
+      </h1>
+      <p class="lead">
+        Tell us about your people, your plans, and the photographs you have in
+        mind. A few thoughtful details help shape the right session.
+      </p>
+      <ul class="inquiry-benefits">
+        <li>
+          <Check size={17} aria-hidden="true" /> Explore a session that fits
+          your needs
+        </li>
+        <li>
+          <Check size={17} aria-hidden="true" /> Share your timing and budget
+          openly
+        </li>
+        <li>
+          <Check size={17} aria-hidden="true" /> No pressure to have every
+          detail decided
+        </li>
+      </ul>
+      <aside class="demo-note">
+        <strong>A note about this concept studio</strong>
+        <p>
+          Alder House is fictional. This form previews your inquiry in this
+          browser; nothing is sent, saved, or booked. Please use sample details.
+        </p>
+      </aside>
+      <p class="small">About 3–5 minutes · Optional fields are marked</p>
+      <a class="text-link" href="/experience/">
+        Still choosing? Compare the sessions
+      </a>
+      <figure class="hero-photo inquiry-keepsake">
+        <img
+          src="/images/couple.jpg"
+          alt="A couple in white sharing a quiet walk by the sea"
+          width="1200"
+          height="1800"
+          loading="lazy"
+        />
+        <img
+          class="hero-stamp"
+          src="/brand/stamp.svg"
+          alt=""
+          width="160"
+          height="160"
+          aria-hidden="true"
+        />
+        <figcaption>A LITTLE DIRECTION. ROOM TO BE YOURSELVES.</figcaption>
+      </figure>
+    </div>
+    <form id="inquiry">
+      <fieldset>
+        <legend>
+          <span>01</span> A little about you
+        </legend>
+        <div class="form-row">
+          <FormField
+            name="name"
+            label="Your name"
+            required
+            placeholder="Alex Morgan"
+          />
+          <FormField
+            name="email"
+            label="Email address"
+            type="email"
+            required
+            placeholder="alex@example.com"
+            max={254}
+          />
+        </div>
+        <div class="form-row">
+          <FormField
+            name="phone"
+            label="Phone number"
+            type="tel"
+            placeholder="A sample phone number"
+          />
+          <FormField
+            name="contact"
+            label="Preferred contact method"
+            options={["Email", "Phone", "No preference"]}
+          />
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>
+          <span>02</span> The session you have in mind
+        </legend>
+        <FormField
+          name="session"
+          label="Your kind of story"
+          required
+          options={sessions.map((session) => session.name)}
+        />
+        <div class="form-row">
+          <FormField name="date" label="A date in mind" type="date" />
+          <FormField
+            name="flexibility"
+            label="How flexible is your timing?"
+            options={[
+              "Flexible — exploring ideas",
+              "A particular month or season",
+              "A fixed date",
+              "Working toward a launch or deadline",
+            ]}
+          />
+        </div>
+        <div class="form-row">
+          <FormField
+            name="location"
+            label="Location or setting"
+            required
+            placeholder="A town, a favorite park, or an indoor studio"
+          />
+          <FormField
+            name="people"
+            label="Who will be photographed?"
+            placeholder="Two adults and two children"
+          />
+        </div>
+        <FormField
+          name="budget"
+          label="Budget you have in mind"
+          options={[
+            "Under $500",
+            "$500–$1,000",
+            "$1,000–$2,500",
+            "$2,500+",
+            "I would like guidance",
+          ]}
+          hint="Planning context only. These ranges are not studio prices or quotes."
+        />
+      </fieldset>
+      <fieldset>
+        <legend>
+          <span>03</span> What matters most
+        </legend>
+        <div class="field">
+          <label for="story">A little about your plans</label>
+          <p class="field-hint" id="story-hint">
+            What is the occasion, what feeling are you after, and what would
+            make these photographs meaningful?
+          </p>
+          <textarea
+            id="story"
+            name="story"
+            rows="4"
+            maxlength="2000"
+            required
+            aria-describedby="story-hint story-count"
+            placeholder="A relaxed family afternoon by the coast, with a mix of portraits and the children playing…"
+          ></textarea>
+          <span class="character-count" id="story-count">
+            0 / 2,000
+          </span>
+        </div>
+        <fieldset class="preferences">
+          <legend>
+            What would you like to make? <span>(optional)</span>
+          </legend>
+          {[
+            "Natural portraits",
+            "Candid moments",
+            "Prints for home",
+            "Website & social images",
+          ].map((value) => (
+            <label>
+              <input type="checkbox" name="priorities" value={value} />
+              {value}
+            </label>
+          ))}
+        </fieldset>
+        <FormField
+          name="references"
+          label="Inspiration or website link"
+          type="url"
+          placeholder="https://example.com/inspiration"
+          max={500}
+        />
+        <FormField
+          name="comfort"
+          label="Anything that would help you feel comfortable?"
+          placeholder="A quiet setting, step-free access, or time for breaks"
+          hint="Share practical preferences only; please leave out medical or sensitive details."
+          max={500}
+        />
+        <FormField
+          name="questions"
+          label="Questions for the studio"
+          placeholder="What would you like to talk through?"
+          max={500}
+        />
+      </fieldset>
+      <div class="form-finish">
+        <p>
+          Review your sample details, then preview the next step. No account,
+          payment, or booking is created.
+        </p>
+        <button class="button" type="submit" disabled>
+          <MessageCircle size={18} aria-hidden="true" /> Preview your inquiry
+        </button>
+        <noscript>
+          <p>Enable JavaScript to try the inquiry preview. Nothing is sent.</p>
+        </noscript>
+        <a href="/privacy/">How this demo handles your details</a>
+      </div>
+      <div id="confirmation" role="status" tabindex="-1" hidden>
+        <h2>A lovely beginning.</h2>
+        <p>
+          Nothing was sent or saved, and no booking has been made. Here is the
+          starting point you have outlined:
+        </p>
+        <dl id="inquiry-summary"></dl>
+        <p>
+          In a live studio, the next step would be to discuss availability,
+          session scope, pricing, and a written agreement.
+        </p>
+        <button type="reset" class="text-link">
+          Try another story
+        </button>
+      </div>
+    </form>
+  </section>
+  <InquiryHelp />
+  <SessionGuide
+    title="Clarity before commitment."
+    href="/experience/"
+    action="Compare the session experiences"
+  />
+</Layout>
+<script>
+  import "../client/inquiry";
+</script>

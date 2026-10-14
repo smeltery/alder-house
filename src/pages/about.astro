@@ -1,0 +1,98 @@
+---
+import { Palette, MessageCircle } from "lucide-astro";
+import Layout from "../layouts/Layout.astro";
+import SessionGuide from "../components/SessionGuide.astro";
+import Closing from "../components/Closing.astro";
+import { getContent } from "../lib/content";
+const { settings } = await getContent();
+const values = [
+  [
+    "Personality first",
+    "We start with what you want to remember or communicate. The setting and pace follow your life, rather than the other way around.",
+  ],
+  [
+    "Direction, gently",
+    "Natural movement, clear prompts, and time to settle in. You don’t need to arrive knowing how to pose.",
+  ],
+  [
+    "Details with purpose",
+    "Clothing, light, location, and image use shape the plan. Thoughtful preparation makes room for a relaxed session.",
+  ],
+];
+---
+
+<Layout title="Our story — Alder House">
+  <section class="editorial-hero studio-hero wrap">
+    <div>
+      <p class="eyebrow">THE SPIRIT OF ALDER HOUSE</p>
+      <h1>
+        For the feeling.
+        <br />
+        <em>Not just the frame.</em>
+      </h1>
+      <p class="lead">{settings.story}</p>
+      <a class="button" href="/inquire/">
+        <MessageCircle size={18} aria-hidden="true" /> Tell us a little about
+        you
+      </a>
+    </div>
+    <figure class="studio-portrait">
+      <img
+        src="/images/portrait.jpg"
+        alt="A woman in a classic pinstripe blazer photographed in natural light"
+        width="1000"
+        height="1250"
+        fetchpriority="high"
+      />
+      <figcaption>THE STUDIO MOOD / PERSONAL, NATURAL, UNHURRIED</figcaption>
+    </figure>
+  </section>
+  <section class="studio-values">
+    <div class="wrap">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WHAT GUIDES US</p>
+          <h2>
+            Considered photographs.
+            <br />
+            <em>Comfortable people.</em>
+          </h2>
+        </div>
+        <p class="heading-note">
+          A little direction when you need it.
+          <br />
+          Space to be yourself when you don’t.
+        </p>
+      </div>
+      <div class="value-cards">
+        {values.map(([title, text], index) => (
+          <article>
+            <span class="eyebrow">0{index + 1} / OUR APPROACH</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+      <a class="button pale" href="/experience/">
+        Find your kind of session
+      </a>
+    </div>
+  </section>
+  <SessionGuide title="A familiar face. A clear next step." />
+  <section class="studio-signature wrap">
+    <img src="/brand/stamp.svg" width="160" height="160" alt="" />
+    <div>
+      <p class="eyebrow">BEHIND THE SIGNATURE</p>
+      <h2>A studio with a point of view.</h2>
+      <p>
+        Alder House is a fictional studio created by smeltery. Explore the
+        colors, type, and details behind its identity. Stories and services are
+        illustrative; photographs belong to their credited creators.
+      </p>
+    </div>
+    <a class="button" href="/brand/">
+      <Palette size={18} aria-hidden="true" /> Explore the identity
+    </a>
+  </section>
+  <Closing />
+</Layout>

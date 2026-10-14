@@ -1,0 +1,181 @@
+---
+import { ExternalLink } from "lucide-astro";
+import galleryPhotos from "../lib/gallery-photos.json";
+import Layout from "../layouts/Layout.astro";
+import "../styles/credits.css";
+const originals = [
+  [
+    "family",
+    "Coastal family portrait",
+    "Hoi An and Da Nang Photographer",
+    "jv1xCkHFoXo",
+  ],
+  [
+    "couple",
+    "A couple walking by the sea",
+    "Hoi An and Da Nang Photographer",
+    "8G5z5uTx9QI",
+  ],
+  [
+    "portrait",
+    "Portrait in a pinstripe blazer",
+    "Nick Karvounis",
+    "Y2Z_VQ6B86o",
+  ],
+  ["brand", "Portrait in a white blazer", "Kawê Rodrigues", "8gh5dVo8uyM"],
+].map(([file, alt, credit, id]) => ({
+  src: `/images/${file}.jpg`,
+  alt,
+  credit,
+  url: `https://unsplash.com/photos/${id}`,
+}));
+const photographs = [...originals, ...galleryPhotos];
+const photographers = [...new Set(photographs.map((photo) => photo.credit))];
+const resources = [
+  [
+    "Typography",
+    "Italiana & DM Sans",
+    "Our display and reading typefaces, served through Google Fonts.",
+    "https://fonts.google.com/",
+    "Explore Google Fonts",
+  ],
+  [
+    "Interface icons",
+    "Lucide",
+    "The consistent line icons used in navigation, galleries, and forms. Licensed under ISC.",
+    "https://lucide.dev/license",
+    "Lucide license",
+  ],
+  [
+    "Brand icons",
+    "Font Awesome",
+    "The GitHub mark in our footer comes from Font Awesome Free. Icons are licensed under CC BY 4.0.",
+    "https://fontawesome.com/license/free",
+    "Font Awesome license",
+  ],
+];
+---
+
+<Layout title="Photography & design credits — Alder House">
+  <section class="page-intro wrap credits-intro">
+    <p class="eyebrow">THE PEOPLE BEHIND THE PICTURES</p>
+    <h1>
+      Beautiful work.
+      <br />
+      <em>Properly credited.</em>
+    </h1>
+    <p class="lead">
+      Alder House is an imagined studio, brought to life with photographs by
+      independent creators. Meet the people behind the images and find each
+      original.
+    </p>
+    <nav class="credit-jumps" aria-label="Credits sections">
+      <a href="#photography">Photography · {photographs.length} images</a>
+      <a href="#design-resources">Fonts & icons</a>
+      <a href="#usage">Usage & licensing</a>
+    </nav>
+  </section>
+  <section class="credit-collection" id="photography">
+    <div class="wrap">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PHOTOGRAPHY DIRECTORY</p>
+          <h2>
+            Every image.
+            <br />
+            <em>Its original creator.</em>
+          </h2>
+        </div>
+        <p class="heading-note">
+          Select a photograph to visit its source.
+          <br />
+          All source links open in this tab.
+        </p>
+      </div>
+      <nav class="credit-jumps" aria-label="Find a photographer">
+        {photographers.map((name, index) => (
+          <a href={`#photographer-${index}`}>{name}</a>
+        ))}
+      </nav>
+      {photographers.map((name, index) => (
+        <section
+          class="photographer-group"
+          id={`photographer-${index}`}
+          aria-labelledby={`credit-name-${index}`}
+        >
+          <h3 id={`credit-name-${index}`}>{name}</h3>
+          <div class="credit-grid">
+            {photographs
+              .filter((photo) => photo.credit === name)
+              .map((photo) => (
+                <a class="credit-card" href={photo.url}>
+                  <img
+                    src={photo.src}
+                    alt=""
+                    width="240"
+                    height="180"
+                    loading="lazy"
+                  />
+                  <div>
+                    <span>{photo.alt}</span>
+                    <small>
+                      View original on Unsplash{" "}
+                      <ExternalLink size={13} aria-hidden="true" />
+                    </small>
+                  </div>
+                </a>
+              ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+  <section class="inspiration-room wrap" id="design-resources">
+    <p class="eyebrow">THE REST OF THE TOOLKIT</p>
+    <h2>
+      Small details.
+      <br />
+      <em>A shared vocabulary.</em>
+    </h2>
+    <div class="inspiration-notes">
+      {resources.map(([category, title, copy, href, label]) => (
+        <article>
+          <p class="eyebrow">{category}</p>
+          <h3>{title}</h3>
+          <p>{copy}</p>
+          <a class="text-link" href={href}>
+            {label} <ExternalLink size={14} aria-hidden="true" />
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="preparation" id="usage">
+    <div class="wrap detail-section">
+      <div>
+        <p class="eyebrow">USE WITH CARE</p>
+        <h2>
+          Credit the work.
+          <br />
+          <em>Respect the source.</em>
+        </h2>
+      </div>
+      <div>
+        <p>
+          These stock collections illustrate the design. They are not Alder
+          House commissions, client sessions, or endorsements. Rights remain
+          with their creators.
+        </p>
+        <p>
+          Photography follows the{" "}
+          <a href="https://unsplash.com/license">Unsplash License</a>,
+          separately from this project’s code license. Follow each original
+          source to review its terms before reusing an image.
+        </p>
+        <a class="button" href="/brand/">
+          Explore Alder House brand resources
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

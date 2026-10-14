@@ -1,0 +1,136 @@
+---
+import { Plus, MessageCircle } from "lucide-astro";
+import Layout from "../layouts/Layout.astro";
+import SessionGuide from "../components/SessionGuide.astro";
+import Closing from "../components/Closing.astro";
+import { sessionDetails } from "../lib/session-details";
+---
+
+<Layout title="The experience — Alder House">
+  <section class="session-opening wrap">
+    <div>
+      <p class="eyebrow">THE ALDER HOUSE EXPERIENCE</p>
+      <h1>
+        Your story.
+        <br />
+        <em>Your own way.</em>
+      </h1>
+    </div>
+    <div>
+      <p class="lead">
+        A milestone, a morning with your people, a fresh chapter for your
+        business. There’s a thoughtful place to begin.
+      </p>
+      <a class="button" href="#session-options">
+        Choose your experience
+      </a>
+      <p class="small">Planning together. Gentle direction. Room to be you.</p>
+    </div>
+  </section>
+  <section
+    class="session-catalog"
+    id="session-options"
+    aria-label="Session options"
+  >
+    <div class="wrap">
+      <p class="eyebrow">FOUR WAYS TO TELL YOUR STORY</p>
+      <div class="session-cards">
+        {sessionDetails.map((session) => (
+          <article id={session.id}>
+            <img
+              src={`/images/${session.image}.jpg`}
+              alt={`Illustrative ${session.name.toLowerCase()} photography`}
+              width="900"
+              height="700"
+              loading="lazy"
+            />
+            <div>
+              <p class="eyebrow">
+                {session.number} / {session.detail}
+              </p>
+              <h2>{session.name}</h2>
+              <p>{session.description}</p>
+              <a class="button" href={`/sessions/${session.id}/`}>
+                {session.action}
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="session-concierge">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">YOU DON’T HAVE TO HAVE IT ALL FIGURED OUT</p>
+        <h2>
+          Start with an idea.
+          <br />
+          <em>We’ll find the shape.</em>
+        </h2>
+        <p>
+          Share who it’s for, what matters, and how you hope to use your
+          photographs.
+        </p>
+      </div>
+      <a class="button pale" href="/inquire/">
+        <MessageCircle size={20} aria-hidden="true" /> Help me choose a session
+      </a>
+    </div>
+  </section>
+  <SessionGuide />
+  <div class="faq-band">
+    <section class="faq wrap" aria-labelledby="faq-title">
+      <div class="faq-heading">
+        <p class="eyebrow">GOOD TO KNOW</p>
+        <h2 id="faq-title">Before we begin.</h2>
+        <p>A few answers to help you feel at home.</p>
+      </div>
+      <div class="faq-questions">
+        <details>
+          <summary>
+            What if we’re awkward in front of a camera?
+            <Plus size={18} aria-hidden="true" />
+          </summary>
+          <p>
+            That’s a wonderfully normal place to start. The imagined Alder House
+            approach uses gentle prompts, movement, and conversation rather than
+            a long list of poses.
+          </p>
+        </details>
+        <details>
+          <summary>
+            Can we book a session?
+            <Plus size={18} aria-hidden="true" />
+          </summary>
+          <p>
+            This is a fictional portfolio. You can explore the inquiry
+            experience, but no booking, payment, or message is sent.
+          </p>
+        </details>
+        <details>
+          <summary>
+            Where are the photographs from?
+            <Plus size={18} aria-hidden="true" />
+          </summary>
+          <p>
+            Our demo uses licensed stock photography, with individual credits on
+            the <a href="/credits/">image credits page</a>. These are not client
+            albums.
+          </p>
+        </details>
+        <details>
+          <summary>
+            How would we receive our photographs?
+            <Plus size={18} aria-hidden="true" />
+          </summary>
+          <p>
+            The sample experience includes an online gallery. This demo’s
+            stories are public; it does not provide private client delivery.
+          </p>
+        </details>
+      </div>
+    </section>
+  </div>
+  <Closing />
+</Layout>

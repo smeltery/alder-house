@@ -1,0 +1,234 @@
+.editorial-hero,
+.session-opening {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 8%;
+  padding-block: 60px;
+}
+.editorial-hero h1,
+.session-opening h1 {
+  font-size: clamp(48px, 5.5vw, 82px);
+  line-height: 1.05;
+  margin-block: 24px;
+}
+.editorial-hero .lead,
+.session-opening .lead {
+  font-size: 18px;
+}
+.featured-story {
+  position: relative;
+  display: block;
+  color: white;
+  background: var(--ink);
+  text-decoration: none;
+}
+.featured-story > img,
+.studio-portrait > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.05;
+  object-fit: cover;
+}
+.featured-story > div {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 70px 28px 28px;
+  background: linear-gradient(transparent, #162016eb);
+}
+.featured-story h2 {
+  font-size: 36px;
+  margin-block: 8px;
+}
+.featured-story > img:first-child {
+  transition: filter 180ms ease;
+}
+.featured-story > div > span:last-child {
+  display: inline-block;
+  padding: 8px 14px;
+  margin-top: 8px;
+  border: 1px solid #ffffff80;
+  border-radius: 3px;
+}
+.featured-story:is(:hover, :focus-visible) > img:first-child {
+  filter: brightness(0.92);
+}
+.featured-story:is(:hover, :focus-visible) > div > span:last-child {
+  background: white;
+  color: var(--ink);
+}
+.gallery-room,
+.session-catalog {
+  background: #e9ece2;
+  padding-block: 64px;
+}
+.gallery-room .album-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.gallery-room .album-grid .photo {
+  aspect-ratio: 1.25;
+}
+.gallery-room .album {
+  background: var(--paper, #f6f3ec);
+  padding: 14px 14px 22px;
+}
+.gallery-room .album h3,
+.gallery-room .album p,
+.gallery-room .album-meta {
+  margin-inline: 10px;
+}
+.inspiration-room {
+  padding-block: 64px;
+}
+.inspiration-notes,
+.value-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-block: 32px;
+}
+.inspiration-notes article {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.inspiration-notes h3,
+.value-cards h3 {
+  font-size: 28px;
+  margin-block: 14px;
+}
+.studio-portrait {
+  margin: 0;
+  padding: 14px;
+  background: #e9ece2;
+}
+.studio-portrait > img {
+  aspect-ratio: 1.15;
+  object-position: center top;
+}
+.studio-portrait figcaption {
+  padding-top: 12px;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+.studio-values,
+.session-concierge {
+  background: #303a2d;
+  color: #f6f3ec;
+  padding-block: 60px;
+}
+.studio-values p,
+.session-concierge p {
+  color: #e5e7da;
+}
+.value-cards article {
+  border-top: 1px solid #7e8977;
+  padding-top: 22px;
+}
+.studio-signature {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 32px;
+  margin-bottom: 64px;
+  background: #e9ece2;
+}
+.studio-signature > img {
+  width: 120px;
+  height: auto;
+}
+.studio-signature h2 {
+  font-size: 32px;
+}
+.studio-signature p {
+  max-width: 65ch;
+}
+.session-opening .small {
+  margin-top: 20px;
+}
+.session-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 24px;
+}
+.session-cards article {
+  display: flex;
+  flex-direction: column;
+  background: #f6f3ec;
+}
+.session-cards img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.9;
+  object-fit: cover;
+  object-position: center 35%;
+}
+.session-cards article > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 28px;
+}
+.session-cards h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  margin-block: 10px;
+}
+.session-cards article > div > p:last-of-type {
+  margin-bottom: 24px;
+}
+.session-cards .button {
+  margin-top: auto;
+}
+.session-concierge > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.session-concierge .button {
+  flex-shrink: 0;
+}
+#stories,
+#session-options {
+  scroll-margin-top: 100px;
+}
+@media (max-width: 760px) {
+  .editorial-hero,
+  .session-opening {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-block: 36px;
+  }
+  .inspiration-notes,
+  .value-cards,
+  .session-cards,
+  .gallery-room .album-grid {
+    grid-template-columns: 1fr;
+  }
+  .studio-signature {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 20px;
+  }
+  .session-concierge > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .gallery-room,
+  .session-catalog,
+  .studio-values,
+  .session-concierge,
+  .inspiration-room {
+    padding-block: 40px;
+  }
+}
+
+.session-cards article:first-child img {
+  object-position: center top;
+}
+.featured-story .eyebrow {
+  color: #fff;
+}

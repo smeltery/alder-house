@@ -1,0 +1,20 @@
+schema-version = "1.18.0"
+[install]
+bun.pkg-path = "bun"
+bun.version = "1.3.11"
+nodejs.pkg-path = "nodejs"
+nodejs.version = "24"
+git.pkg-path = "git"
+actionlint.pkg-path = "actionlint"
+[hook]
+on-activate = '''
+  git config core.hooksPath .githooks
+'''
+[services.site]
+command = "bun run dev"
+[services.preview]
+command = "bun run preview --port 4399"
+[services.studio]
+command = "bun run studio"
+[options]
+systems = ["aarch64-darwin", "x86_64-darwin", "aarch64-linux", "x86_64-linux"]

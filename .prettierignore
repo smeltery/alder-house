@@ -1,0 +1,9 @@
+bun.lock
+.flox/
+dist/
+node_modules/
+.astro/
+.sanity/
+test-results/
+playwright-report/
+LICENSE

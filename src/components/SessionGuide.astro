@@ -1,0 +1,48 @@
+---
+import { Check, MessageCircle } from "lucide-astro";
+interface Props {
+  title?: string;
+  href?: string;
+  action?: string;
+}
+const {
+  title = "A little planning. A lot more ease.",
+  href = "/inquire/",
+  action = "Tell us what you have in mind",
+} = Astro.props;
+const steps = [
+  [
+    "Tell us what matters",
+    "Share who is coming, what you are celebrating, and how you hope to use the photographs.",
+  ],
+  [
+    "Make a thoughtful plan",
+    "Talk through location, light, clothing, access needs, and the right pace for your session.",
+  ],
+  [
+    "Know what comes next",
+    "Agree on scope, image selection, usage, and delivery before making a booking.",
+  ],
+];
+---
+
+<section class="guide-section wrap">
+  <div>
+    <p class="eyebrow">THE ALDER HOUSE APPROACH</p>
+    <h2>{title}</h2>
+    <a class="text-link" href={href}>
+      <MessageCircle size={17} aria-hidden="true" /> {action}
+    </a>
+  </div>
+  <ol class="guide-steps">
+    {steps.map(([heading, copy]) => (
+      <li>
+        <Check size={18} aria-hidden="true" />
+        <div>
+          <h3>{heading}</h3>
+          <p>{copy}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>

@@ -1,0 +1,32 @@
+---
+interface Props {
+  inquiry?: string;
+}
+const { inquiry = "/inquire/" } = Astro.props;
+import { MessageCircle } from "lucide-astro";
+---
+
+<section class="closing">
+  <div class="wrap closing-inner">
+    <div>
+      <p class="eyebrow">YOUR PEOPLE. YOUR PLANS. YOUR NEXT CHAPTER.</p>
+      <h2>
+        Something worth
+        <br />
+        <em>remembering.</em>
+      </h2>
+    </div>
+    <div class="closing-invitation">
+      <p>
+        Tell us what you have in mind.
+        <br />
+        We’ll help you picture the possibilities.
+      </p>
+      <a class="button pale" href={inquiry}>
+        <MessageCircle size={18} aria-hidden="true" /> Let’s talk about your
+        session
+      </a>
+      <p class="small">A thoughtful experience, from the first hello.</p>
+    </div>
+  </div>
+</section>

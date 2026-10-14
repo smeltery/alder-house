@@ -1,0 +1,99 @@
+---
+import ToolGuide from "./ToolGuide.astro";
+import Layout from "../layouts/Layout.astro";
+import FormField from "./FormField.astro";
+import { ChevronLeft } from "lucide-astro";
+import "../styles/tools.css";
+interface Props {
+  kind: "wardrobe" | "brand";
+}
+const { kind } = Astro.props;
+const wardrobe = kind === "wardrobe";
+const choices = wardrobe
+  ? ["Coastal light", "Garden greens", "City neutrals"]
+  : ["Website refresh", "Social storytelling", "Product launch"];
+---
+
+<Layout
+  title={`${wardrobe ? "What to wear" : "Brand shot-list builder"} — Alder House`}
+>
+  <section class="page-intro wrap tools-intro">
+    <a class="back-link tool-back" href="/tools/">
+      <ChevronLeft size={18} aria-hidden="true" />
+      All planning tools
+    </a>
+    <p class="eyebrow">
+      {wardrobe ? "FEEL LIKE YOURSELF" : "PHOTOGRAPHS WITH A PURPOSE"}
+    </p>
+    <h1>{wardrobe ? "A little coordination." : "Make every image count."}</h1>
+    <p class="lead">
+      {wardrobe
+        ? "Choose a setting for a palette and practical outfit suggestions. Coordinate without dressing everyone alike."
+        : "Choose where your photographs will work. Build a starting shot list to discuss before your brand session."}
+    </p>
+  </section>
+  <nav class="tool-jumps wrap" aria-label="On this page">
+    <a href="#creative-tool">Use the tool</a>
+    <a href="#using-this-tool">Tips & example</a>
+  </nav>
+  <section class="planning-workspace wrap">
+    <form id="creative-tool" data-kind={kind}>
+      <FormField
+        name="direction"
+        label={wardrobe ? "Your setting" : "Your main project"}
+        required
+        options={choices}
+      />
+      <button type="submit" class="button" disabled>
+        {wardrobe ? "Show my palette" : "Build my shot list"}
+      </button>
+      <button type="reset" class="text-link">
+        Start again
+      </button>
+      <p class="small">
+        A creative starting point, not a fixed package. You can edit the ideas
+        in your inquiry.
+      </p>
+      <noscript>
+        <p>
+          Enable JavaScript to build your guide, or{" "}
+          <a href="/inquire/">tell us what you have in mind</a>.
+        </p>
+      </noscript>
+    </form>
+    <aside
+      class="planning-result"
+      id="creative-result"
+      tabindex="-1"
+      aria-labelledby="creative-title"
+    >
+      <p class="eyebrow">YOUR PERSONAL STARTING POINT</p>
+      <h2 id="creative-title">Room for your ideas.</h2>
+      <p id="creative-intro">Choose a direction to reveal your guide.</p>
+      <div id="palette" role="group" aria-label="Suggested colors"></div>
+      <ul id="creative-list"></ul>
+      <a class="button" id="creative-inquiry" href="/inquire/" hidden>
+        Discuss these ideas
+      </a>
+    </aside>
+  </section>
+  <ToolGuide slug={wardrobe ? "wardrobe-guide" : "brand-shot-list"} />
+  <section class="inline-invitation wrap">
+    <div>
+      <h2>
+        {wardrobe ? "Comfort comes first." : "Start with how you’ll use them."}
+      </h2>
+      <p>
+        {wardrobe
+          ? "Try outfits on together, choose comfortable shoes, and bring a layer. Keep personal style at the center of the plan."
+          : "Bring examples of your website and existing visuals. We’ll discuss crops, space for text, and the story behind your business."}
+      </p>
+    </div>
+    <a class="button" href="/tools/session-planner/">
+      Plan the rest of your session
+    </a>
+  </section>
+  <script>
+    import "../client/creative-tool";
+  </script>
+</Layout>

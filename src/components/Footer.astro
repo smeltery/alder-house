@@ -1,0 +1,81 @@
+---
+interface Props {
+  inquiry?: string;
+}
+const { inquiry = "/inquire/" } = Astro.props;
+import { ArrowUp, MessageCircle } from "lucide-astro";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { sessions } from "../lib/demo";
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-identity">
+        <a class="brand" href="/" aria-label="Alder House home">
+          <img
+            class="footer-stamp"
+            src="/brand/stamp.svg"
+            width="72"
+            height="72"
+            alt=""
+          />
+          <span class="wordmark">
+            alder house<span>PHOTOGRAPHY STUDIO</span>
+          </span>
+        </a>
+        <p>
+          Good company. Beautiful light.
+          <br />
+          Photographs with a life of their own.
+        </p>
+        <a class="source-link" href="https://github.com/smeltery/alder-house">
+          <svg
+            viewBox={`0 0 ${faGithub.icon[0]} ${faGithub.icon[1]}`}
+            width="18"
+            height="18"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d={faGithub.icon[4] as string} />
+          </svg>
+          A smeltery concept
+        </a>
+      </div>
+      <nav aria-label="Footer sessions">
+        <h2>YOUR SESSION</h2>
+        <a href="/tools/">Planning tools</a>
+        {sessions.map((session) => (
+          <a href={`/sessions/${session.id}/`}>{session.name}</a>
+        ))}
+      </nav>
+      <nav aria-label="Footer studio">
+        <h2>THE STUDIO</h2>
+        <a href="/work/">Portfolio</a>
+        <a href="/about/">About Alder House</a>
+        <a href="/experience/">The experience</a>
+        <a href="/brand/">Brand resources</a>
+        <a href="/credits/">Photography credits</a>
+      </nav>
+      <div class="footer-invitation">
+        <p class="eyebrow">SOMETHING IN MIND?</p>
+        <h2>
+          Let’s make
+          <br />
+          <em>it yours.</em>
+        </h2>
+        <a class="text-link" href={inquiry}>
+          <MessageCircle size={17} aria-hidden="true" /> Start a conversation
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {new Date().getFullYear()} Alder House</span>
+      <span>Fictional studio · No live bookings</span>
+      <a href="/privacy/">Privacy</a>
+      <a href="#top" class="back-top">
+        Back to top <ArrowUp size={15} aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</footer>

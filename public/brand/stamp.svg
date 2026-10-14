@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <path id="top" d="M23 80a57 57 0 0 1 114 0"/>
+    <path id="bottom" d="M14 80a66 66 0 0 0 132 0"/>
+  </defs>
+  <circle cx="80" cy="80" r="79" fill="#fff"/>
+  <g fill="none" stroke="#303a2d">
+    <circle cx="80" cy="80" r="74" stroke-width=".8"/>
+    <circle cx="80" cy="80" r="46" stroke-width=".6" opacity=".45"/>
+  </g>
+  <g fill="#303a2d" text-anchor="middle" font-family="Arial,sans-serif">
+    <text font-size="13" letter-spacing="3.5"><textPath href="#top" startOffset="50%">ALDER HOUSE</textPath></text>
+    <text font-size="8.5" letter-spacing="2"><textPath href="#bottom" startOffset="50%">PHOTOGRAPHY STUDIO</textPath></text>
+    <circle cx="19" cy="82" r="1.8"/>
+    <circle cx="141" cy="82" r="1.8"/>
+  </g>
+  <g transform="translate(52 46.4) scale(.7)" fill="none" stroke="#303a2d" stroke-width="3" stroke-linecap="square">
+    <path d="M8 88V40a32 32 0 0 1 64 0v48Z"/>
+    <path d="M18 66 29 34 40 66M23 52h12M46 34v32m16-32v32M46 52h16"/>
+  </g>
+</svg>

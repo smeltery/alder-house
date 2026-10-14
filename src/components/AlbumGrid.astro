@@ -1,0 +1,35 @@
+---
+import type { Album } from "../lib/demo";
+interface Props {
+  albums: Album[];
+}
+const { albums } = Astro.props;
+---
+
+<div class="album-grid">
+  {albums.map((album, index) => (
+    <a class="album" href={`/work/${album.slug}/`}>
+      <>
+        <div class="photo">
+          <img
+            src={album.cover.src}
+            alt={album.cover.alt}
+            style={`object-position: ${(album.cover.hotspot?.x ?? 0.5) * 100}% ${(album.cover.hotspot?.y ?? 0.5) * 100}%`}
+            width="1000"
+            height="1250"
+            loading="lazy"
+          />
+        </div>
+        <div class="album-meta">
+          <>
+            <span class="eyebrow">
+              {album.category} / 0{index + 1}
+            </span>
+          </>
+        </div>
+        <h3>{album.title}</h3>
+        <p>{album.location}</p>
+      </>
+    </a>
+  ))}
+</div>

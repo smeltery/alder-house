@@ -1,0 +1,63 @@
+---
+import { ChevronDown } from "lucide-astro";
+interface Props {
+  name: string;
+  label: string;
+  type?: "text" | "email" | "tel" | "date" | "url";
+  required?: boolean;
+  placeholder?: string;
+  options?: string[];
+  hint?: string;
+  max?: number;
+}
+const {
+  name,
+  label,
+  type = "text",
+  required = false,
+  placeholder,
+  options,
+  hint,
+  max = 120,
+} = Astro.props;
+const id = `field-${name}`;
+---
+
+<div class="field">
+  <label for={id}>
+    {label}
+    {!required && <span> (optional)</span>}
+  </label>
+  {options ? (
+    <div class="select-wrap">
+      <select
+        id={id}
+        name={name}
+        required={required}
+        aria-describedby={hint ? `${id}-hint` : undefined}
+      >
+        <option value="">Choose an option</option>
+        {options.map((option) => (
+          <option>{option}</option>
+        ))}
+      </select>
+      <ChevronDown size={17} aria-hidden="true" />
+    </div>
+  ) : (
+    <input
+      id={id}
+      name={name}
+      type={type}
+      required={required}
+      placeholder={placeholder}
+      maxlength={max}
+      autocomplete="off"
+      aria-describedby={hint ? `${id}-hint` : undefined}
+    />
+  )}
+  {hint && (
+    <p class="field-hint" id={`${id}-hint`}>
+      {hint}
+    </p>
+  )}
+</div>

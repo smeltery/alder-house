@@ -1,0 +1,120 @@
+.session-gallery {
+  padding-block: 48px;
+  scroll-margin-top: 100px;
+}
+.photo-sequence {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.photo-sequence > a {
+  display: block;
+  background: #e9ece2;
+  text-decoration: none;
+}
+.photo-sequence > a:nth-child(5n + 1) {
+  grid-column: 1 / -1;
+}
+.photo-sequence img {
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
+  object-fit: contain;
+}
+.photo-sequence a > span {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 18px;
+}
+.photo-sequence a:hover {
+  background: #dce2d3;
+}
+#photo-viewer {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 20px;
+  border: 0;
+  background: #192018;
+  color: #fff;
+}
+#photo-viewer[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.viewer-toolbar,
+.viewer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+#photo-viewer button {
+  display: grid;
+  place-items: center;
+  min-width: 48px;
+  min-height: 48px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #879382;
+  cursor: pointer;
+}
+#photo-viewer button:hover {
+  background: #394632;
+}
+#photo-viewer button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+#photo-viewer figure {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#photo-viewer figure img {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  object-fit: contain;
+}
+#photo-viewer figcaption {
+  text-align: center;
+  font-size: 13px;
+}
+.viewer-controls {
+  justify-content: center;
+}
+#photo-viewer [data-image-error] {
+  color: #fff;
+  text-align: center;
+}
+.story-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-block: 36px;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 640px) {
+  .photo-sequence {
+    gap: 12px;
+  }
+  .photo-sequence a > span {
+    padding: 10px;
+  }
+  #photo-viewer {
+    padding: 12px;
+  }
+  .story-navigation {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

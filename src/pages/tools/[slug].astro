@@ -1,0 +1,134 @@
+---
+import { ChevronLeft } from "lucide-astro";
+import ToolGuide from "../../components/ToolGuide.astro";
+import Layout from "../../layouts/Layout.astro";
+import FormField from "../../components/FormField.astro";
+import { sessions } from "../../lib/demo";
+import { goals, planningOptions } from "../../lib/planning";
+import "../../styles/tools.css";
+export function getStaticPaths() {
+  return ["session-finder", "session-planner"].map((slug) => ({
+    params: { slug },
+  }));
+}
+const finder = Astro.params.slug === "session-finder";
+const title = finder ? "Find your session" : "Shape your session";
+---
+
+<Layout title={`${title} — Alder House`}>
+  <section class="page-intro wrap">
+    <a class="back-link tool-back" href="/tools/">
+      <ChevronLeft size={18} aria-hidden="true" /> All planning tools
+    </a>
+    <p class="eyebrow">
+      {finder ? "A GOOD PLACE TO BEGIN" : "FROM A FEW IDEAS TO A PLAN"}
+    </p>
+    <h1>{title}.</h1>
+    <p class="lead">
+      {finder
+        ? "What would you like these photographs to celebrate? Choose a starting point and we’ll help you find your fit."
+        : "Choose what you know. Leave room for what you don’t. Everything can be changed in your inquiry."}
+    </p>
+  </section>
+  <nav class="tool-jumps wrap" aria-label="On this page">
+    <a href="#planning-tool">Use the tool</a>
+    <a href="#using-this-tool">Tips & example</a>
+  </nav>
+  <section class="planning-workspace wrap">
+    <form id="planning-tool">
+      {finder ? (
+        <FormField
+          name="goal"
+          label="What brings you here?"
+          required
+          options={goals.map((goal) => goal.label)}
+        />
+      ) : (
+        <FormField
+          name="session"
+          label="Your session"
+          required
+          options={sessions.map((session) => session.name)}
+        />
+      )}
+      <FormField
+        name="location"
+        label="Your ideal setting"
+        options={planningOptions.location}
+      />
+      {!finder && (
+        <>
+          <FormField
+            name="people"
+            label="Who is coming?"
+            options={planningOptions.people}
+          />
+          <FormField
+            name="priority"
+            label="Your main priority"
+            options={planningOptions.priority}
+          />
+        </>
+      )}
+      <button class="button" type="submit" disabled>
+        {finder ? "Show my match" : "Preview my plan"}
+      </button>
+      <button class="text-link" type="reset">
+        Start again
+      </button>
+      <p class="small">
+        No names or contact details needed. Only these planning choices are
+        included in your inquiry link; nothing is booked or sent.
+      </p>
+      <noscript>
+        <p>
+          This interactive tool needs JavaScript. You can{" "}
+          <a href="/experience/">compare all sessions</a> or{" "}
+          <a href="/inquire/">start an inquiry</a> instead.
+        </p>
+      </noscript>
+    </form>
+    <aside
+      class="planning-result"
+      id="planning-result"
+      tabindex="-1"
+      aria-labelledby="result-title"
+    >
+      <p class="eyebrow">YOUR STARTING POINT</p>
+      <h2 id="result-title">A little direction.</h2>
+      <p id="result-copy">
+        Your suggestion will appear here. It’s a starting point, with room to
+        change your mind before making an inquiry.
+      </p>
+      <dl id="plan-summary"></dl>
+      <div id="plan-actions" hidden>
+        <a class="button" id="plan-inquiry" href="/inquire/">
+          Discuss this plan
+        </a>
+        <a class="text-link" id="plan-session" href="/experience/">
+          Explore this experience
+        </a>
+      </div>
+    </aside>
+  </section>
+  <ToolGuide slug={finder ? "session-finder" : "session-planner"} />
+  <section class="inline-invitation wrap">
+    <div>
+      <h2>{finder ? "Found your direction?" : "Still finding your fit?"}</h2>
+      <p>
+        {finder
+          ? "Add a few practical details with the session planner."
+          : "The session finder can help you choose a starting point."}
+      </p>
+    </div>
+    <a
+      class="button"
+      href={finder ? "/tools/session-planner/" : "/tools/session-finder/"}
+    >
+      {finder ? "Open the planner" : "Try the session finder"}
+    </a>
+  </section>
+  <script>
+    import "../../client/planning";
+  </script>
+</Layout>

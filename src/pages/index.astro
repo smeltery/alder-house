@@ -1,0 +1,167 @@
+---
+import { MessageCircle, Check } from "lucide-astro";
+import Layout from "../layouts/Layout.astro";
+import Closing from "../components/Closing.astro";
+import AlbumGrid from "../components/AlbumGrid.astro";
+import { getContent } from "../lib/content";
+import { sessions } from "../lib/demo";
+const { albums, settings } = await getContent();
+---
+
+<Layout>
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">PORTRAITS · FAMILIES · LIFESTYLE · BRANDS</p>
+      <h1>{settings.headline}</h1>
+      <p class="lead">{settings.introduction}</p>
+      <div class="cta-row">
+        <a class="button" href="/inquire/">
+          <MessageCircle size={18} aria-hidden="true" /> Plan your session
+        </a>
+        <a class="text-link" href="/work/">
+          Explore the portfolio
+        </a>
+      </div>
+      <p class="hero-reassurance">
+        <Check size={15} aria-hidden="true" /> Your ideas. A clear plan. No
+        pressure.
+      </p>
+    </div>
+    <figure class="hero-photo">
+      <img
+        src="/images/family.jpg"
+        alt="A family in light summer clothes walking together along the beach"
+        width="1400"
+        height="1750"
+        fetchpriority="high"
+      />
+      <img
+        class="hero-stamp"
+        src="/brand/stamp.svg"
+        alt=""
+        width="160"
+        height="160"
+        aria-hidden="true"
+      />
+      <figcaption>
+        <span>GOOD COMPANY. BEAUTIFUL LIGHT.</span>
+        <span>THE COASTAL EDIT</span>
+      </figcaption>
+    </figure>
+  </section>
+  <section class="session-intro wrap" aria-labelledby="find-session">
+    <div>
+      <p class="eyebrow">A PLACE TO BEGIN</p>
+      <h2 id="find-session">What brings you here?</h2>
+      <p>A new chapter, your favorite people, or something you’re building.</p>
+    </div>
+    <nav aria-label="Find your photography session">
+      {sessions.map((session) => (
+        <a href={`/sessions/${session.id}/`}>
+          <span aria-hidden="true">{session.number}</span>
+          {session.name}
+        </a>
+      ))}
+    </nav>
+  </section>
+  <section class="section wrap">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">SELECTED WORK / A PERSONAL PERSPECTIVE</p>
+        <h2>
+          Life moves.
+          <br />
+          <em>We pay attention.</em>
+        </h2>
+      </div>
+      <a class="text-link" href="/work/">
+        Explore the portfolio
+      </a>
+    </div>
+    <AlbumGrid albums={albums.slice(0, 3)} />
+  </section>
+  <section class="story-section">
+    <div class="wrap story-grid">
+      <div class="story-photo">
+        <img
+          src="/images/couple.jpg"
+          alt="A couple in white walking hand in hand along the shoreline"
+          width="900"
+          height="1100"
+          loading="lazy"
+        />
+        <span class="image-note">The beautiful in-between.</span>
+      </div>
+      <div>
+        <p class="eyebrow">LESS POSING. MORE BEING.</p>
+        <h2>
+          Be here.
+          <br />
+          Be yourselves.
+          <br />
+          <em>We’ll remember.</em>
+        </h2>
+        <p>{settings.story}</p>
+        <a class="text-link" href="/about/">
+          Meet the spirit of Alder House
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="section wrap">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">ROOM FOR YOUR KIND OF STORY</p>
+        <h2>
+          Many chapters.
+          <br />
+          <em>All your own.</em>
+        </h2>
+      </div>
+      <p class="heading-note">
+        A new portrait, a familiar face,
+        <br />a story ready to be told.
+      </p>
+    </div>
+    <div class="sessions">
+      {sessions.map((session) => (
+        <article>
+          <>
+            <span class="eyebrow">{session.number} / THE EXPERIENCE</span>
+            <h3>{session.name}</h3>
+            <p>{session.description}</p>
+            <small>{session.detail}</small>
+            <a class="text-link session-link" href={`/sessions/${session.id}/`}>
+              {session.action}
+            </a>
+          </>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="process wrap">
+    <p class="eyebrow">SIMPLE FROM THE VERY BEGINNING</p>
+    <h2>
+      A conversation.
+      <br />A connection. <em>A keepsake.</em>
+    </h2>
+    <ol>
+      <li>
+        <span>01</span>
+        <h3>Tell us a little.</h3>
+        <p>Your people, your plans, and what matters most.</p>
+      </li>
+      <li>
+        <span>02</span>
+        <h3>Make it your own.</h3>
+        <p>A gentle plan, with plenty of room for the unexpected.</p>
+      </li>
+      <li>
+        <span>03</span>
+        <h3>Live the day.</h3>
+        <p>Be with your favorite people. Let the memories happen.</p>
+      </li>
+    </ol>
+  </section>
+  <Closing />
+</Layout>

@@ -1,0 +1,78 @@
+.credit-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+.credit-jumps a {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+}
+.credit-jumps a:hover {
+  background: #dce2d3;
+}
+.credit-collection {
+  background: #e9ece2;
+  padding-block: 56px;
+}
+.photographer-group {
+  padding-top: 36px;
+}
+.photographer-group h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.credit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.credit-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  text-decoration: none;
+}
+.credit-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background: #dedfd6;
+}
+.credit-card > div {
+  padding: 16px;
+}
+.credit-card span {
+  display: block;
+  font-size: 14px;
+}
+.credit-card small {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 11px;
+}
+.credit-card:hover small {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+:is(#photography, #design-resources, #usage, .photographer-group) {
+  scroll-margin-top: 105px;
+}
+#usage .detail-section {
+  padding-block: 0;
+}
+@media (max-width: 1000px) {
+  .credit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .credit-grid {
+    grid-template-columns: 1fr;
+  }
+}

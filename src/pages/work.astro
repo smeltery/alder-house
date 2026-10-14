@@ -1,0 +1,116 @@
+---
+import { MessageCircle } from "lucide-astro";
+import Layout from "../layouts/Layout.astro";
+import AlbumGrid from "../components/AlbumGrid.astro";
+import Closing from "../components/Closing.astro";
+import { getContent } from "../lib/content";
+const { albums } = await getContent();
+const featured = albums[0];
+const prompts = [
+  [
+    "The feeling",
+    "Quietly composed, full of movement, or a little of both. Notice what feels like you.",
+  ],
+  [
+    "The setting",
+    "A favorite room, a familiar street, a stretch of coast. Start somewhere you feel at home.",
+  ],
+  [
+    "The purpose",
+    "For your walls, your people, or your business. Tell us where these photographs will live.",
+  ],
+];
+---
+
+<Layout title="The work — Alder House">
+  <section class="editorial-hero wrap">
+    <div>
+      <p class="eyebrow">THE ALDER HOUSE PORTFOLIO</p>
+      <h1>
+        Ordinary magic.
+        <br />
+        <em>Extraordinary days.</em>
+      </h1>
+      <p class="lead">
+        Personality, connection, and the places that hold a little meaning. Find
+        a feeling you’d like to make your own.
+      </p>
+      <a class="button" href="#stories">
+        Find your inspiration
+      </a>
+    </div>
+    {featured && (
+      <a class="featured-story" href={`/work/${featured.slug}/`}>
+        <img
+          src={featured.cover.src}
+          alt={featured.cover.alt}
+          width="1000"
+          height="1100"
+          fetchpriority="high"
+        />
+        <img
+          class="hero-stamp"
+          src="/brand/stamp.svg"
+          alt=""
+          width="160"
+          height="160"
+          aria-hidden="true"
+        />
+        <div>
+          <span class="eyebrow">
+            INSIDE THE COLLECTION / {featured.category}
+          </span>
+          <h2>{featured.title}</h2>
+          <span>View the story</span>
+        </div>
+      </a>
+    )}
+  </section>
+  <section class="gallery-room" id="stories">
+    <div class="wrap">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE COLLECTION</p>
+          <h2>
+            A few lives.
+            <br />
+            <em>Many little stories.</em>
+          </h2>
+        </div>
+        <p class="heading-note">
+          Illustrative stories, real photographs.
+          <br />
+          Choose a collection to look closer.
+        </p>
+      </div>
+      <AlbumGrid albums={albums} />
+      {albums.length === 0 && (
+        <p>New stories are on their way. Come back soon.</p>
+      )}
+    </div>
+  </section>
+  <section class="inspiration-room wrap">
+    <div>
+      <p class="eyebrow">FROM THEIR STORY TO YOURS</p>
+      <h2>
+        Take the feeling.
+        <br />
+        <em>Make it personal.</em>
+      </h2>
+    </div>
+    <div class="inspiration-notes">
+      {prompts.map(([title, text], index) => (
+        <article>
+          <span class="eyebrow">0{index + 1}</span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </article>
+      ))}
+    </div>
+    <a class="button" href="/inquire/">
+      <MessageCircle size={18} aria-hidden="true" /> Tell us what caught your
+      eye
+    </a>
+  </section>
+  <Closing />
+</Layout>

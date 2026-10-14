@@ -1,0 +1,148 @@
+---
+import { ShieldCheck, Monitor, Eye } from "lucide-astro";
+import Layout from "../layouts/Layout.astro";
+import "../styles/credits.css";
+const topics = [
+  {
+    id: "inquiry-privacy",
+    title: "Your inquiry stays with you",
+    label: "The inquiry form",
+    icon: Monitor,
+    text: "Alder House is a fictional studio. The inquiry form creates a preview in your browser. It does not send your details to us, save them on a server, or make a booking. Please use sample details.",
+    detail:
+      "Links from sessions and portfolio stories can prefill a session type and an inspiration note. You can change both before previewing. Planning tools can also include your chosen setting, group, and image priority. Personal form entries are not added to these links.",
+    href: "/inquire/",
+    action: "Explore the demo inquiry",
+  },
+  {
+    id: "site-services",
+    title: "What loads when you visit",
+    label: "Images, fonts & services",
+    icon: ShieldCheck,
+    text: "This site does not include analytics or advertising cookies. Sample images are hosted with the website. Google Fonts receives ordinary requests to serve our typefaces; when a Sanity project is connected, published images load from Sanity’s CDN.",
+    detail:
+      "Loading the website and these resources involves requests to their hosting services. The demo form does not use a mailing list, payment provider, or booking service.",
+    href: "/credits/",
+    action: "See our creative credits",
+  },
+  {
+    id: "public-galleries",
+    title: "A portfolio open to everyone",
+    label: "Public galleries",
+    icon: Eye,
+    text: "Every portfolio story is public. These sample collections illustrate the studio concept using credited photography. They are not private client galleries or a secure photograph delivery service.",
+    detail:
+      "You do not need an account to browse. Follow the photography credits to find the original creators and image sources.",
+    href: "/work/",
+    action: "Browse the portfolio",
+  },
+];
+---
+
+<Layout
+  title="Privacy — Alder House"
+  description="A plain-language guide to the Alder House demo inquiry, website services, and public galleries."
+>
+  <section class="editorial-hero wrap">
+    <div>
+      <p class="eyebrow">PRIVACY, IN PLAIN LANGUAGE</p>
+      <h1>
+        Your moments.
+        <br />
+        <em>Your privacy.</em>
+      </h1>
+      <p class="lead">
+        A little clarity about what happens when you explore Alder House.
+      </p>
+      <nav class="credit-jumps" aria-label="Privacy topics">
+        {topics.map((topic) => (
+          <a href={`#${topic.id}`}>{topic.label}</a>
+        ))}
+      </nav>
+    </div>
+    <aside class="privacy-summary" aria-label="Privacy at a glance">
+      <ShieldCheck size={32} aria-hidden="true" />
+      <p class="eyebrow">AT A GLANCE</p>
+      <h2>Simple by design.</h2>
+      <ul>
+        <li>Inquiry previews stay in your browser.</li>
+        <li>No analytics or advertising cookies.</li>
+        <li>Public portfolios. No client accounts.</li>
+      </ul>
+      <p>
+        A fictional studio, with a demo form. Please use sample details when
+        exploring.
+      </p>
+    </aside>
+  </section>
+  <div class="privacy-topics">
+    {topics.map(({ icon: Icon, ...topic }, index) => (
+      <section class="detail-section wrap" id={topic.id}>
+        <div>
+          <p class="eyebrow">
+            0{index + 1} / {topic.label}
+          </p>
+          <h2>{topic.title}</h2>
+          <Icon size={28} aria-hidden="true" />
+        </div>
+        <div>
+          <p>{topic.text}</p>
+          <p>{topic.detail}</p>
+          <a class="text-link" href={topic.href}>
+            {topic.action}
+          </a>
+        </div>
+      </section>
+    ))}
+  </div>
+  <section class="inline-invitation wrap">
+    <div>
+      <p class="eyebrow">GET TO KNOW ALDER HOUSE</p>
+      <h2>Thoughtful from the start.</h2>
+      <p>
+        Meet the idea behind the studio and our approach to making photographs.
+      </p>
+    </div>
+    <a class="button" href="/about/">
+      Discover the studio
+    </a>
+  </section>
+</Layout>
+<style>
+  .privacy-summary {
+    background: #e9ece2;
+    padding: clamp(24px, 4vw, 48px);
+  }
+  .privacy-summary h2 {
+    font-size: 36px;
+    margin-block: 12px;
+  }
+  .privacy-summary .eyebrow {
+    margin-top: 20px;
+  }
+  .privacy-summary ul {
+    padding-left: 20px;
+    margin-block: 20px;
+  }
+  .privacy-summary li {
+    padding-block: 8px;
+  }
+  .privacy-summary > p:last-child {
+    font-size: 14px;
+  }
+  .privacy-topics {
+    border-block: 1px solid var(--line);
+  }
+  .privacy-topics section {
+    scroll-margin-top: 100px;
+  }
+  .privacy-topics section + section {
+    border-top: 1px solid var(--line);
+  }
+  .privacy-topics h2 {
+    margin-block: 14px 24px;
+  }
+  .privacy-topics .text-link {
+    margin-top: 12px;
+  }
+</style>

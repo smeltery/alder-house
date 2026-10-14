@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FormField from "./FormField.astro";
+import ToolGuide from "./ToolGuide.astro";
+import { ChevronLeft } from "lucide-astro";
+import { preparation } from "../lib/preparation";
+import "../styles/tools.css";
+interface Props {
+  kind: keyof typeof preparation;
+}
+const { kind } = Astro.props;
+const tool = preparation[kind];
+---
+
+<Layout title={`${tool.title} — Alder House`}>
+  <section class="page-intro wrap tools-intro">
+    <a class="back-link tool-back" href="/tools/">
+      <ChevronLeft size={18} aria-hidden="true" />
+      All planning tools
+    </a>
+    <p class="eyebrow">MAKE ROOM FOR A GOOD EXPERIENCE</p>
+    <h1>{tool.headline}</h1>
+    <p class="lead">{tool.description}</p>
+  </section>
+  <nav class="tool-jumps wrap" aria-label="On this page">
+    <a href="#preparation-tool">Use the tool</a>
+    <a href="#using-this-tool">Tips & example</a>
+  </nav>
+  <section class="planning-workspace wrap">
+    <form id="preparation-tool" data-kind={kind}>
+      <FormField
+        name="direction"
+        label={tool.label}
+        required
+        options={tool.choices.map((choice) => choice.label)}
+      />
+      <button class="button" type="submit" disabled>
+        {tool.action}
+      </button>
+      <button class="text-link" type="reset">
+        Start again
+      </button>
+      <p class="small">
+        Nothing is booked or sent. Your inquiry link carries these suggestions,
+        ready to edit.
+      </p>
+      <noscript>
+        <p>
+          Enable JavaScript to use this tool, or{" "}
+          <a href="/inquire/">tell us about your plans</a>.
+        </p>
+      </noscript>
+    </form>
+    <aside
+      class="planning-result"
+      id="preparation-result"
+      tabindex="-1"
+      aria-labelledby="preparation-title"
+    >
+      <p class="eyebrow">YOUR STARTING POINT</p>
+      <h2 id="preparation-title">Let’s make it easier.</h2>
+      <p id="preparation-status" role="status">
+        Choose an option to see your guide.
+      </p>
+      <ul id="preparation-list"></ul>
+      <a class="button" id="preparation-inquiry" href="/inquire/" hidden>
+        Discuss this plan
+      </a>
+    </aside>
+  </section>
+  <ToolGuide
+    slug={kind === "location" ? "location-finder" : "preparation-checklist"}
+  />
+  <section class="inline-invitation wrap">
+    <div>
+      <h2>Bring the pieces together.</h2>
+      <p>Choose your setting, people, and priorities in the session planner.</p>
+    </div>
+    <a class="button" href="/tools/session-planner/">
+      Open the session planner
+    </a>
+  </section>
+  <script>
+    import "../client/preparation";
+  </script>
+</Layout>

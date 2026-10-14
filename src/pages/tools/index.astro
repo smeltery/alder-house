@@ -1,0 +1,117 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  Compass,
+  ClipboardList,
+  Shirt,
+  Camera,
+  MapPin,
+  ListChecks,
+} from "lucide-astro";
+import "../../styles/tools.css";
+import { toolCatalog } from "../../lib/tool-catalog";
+const icons = [MapPin, ListChecks, Compass, ClipboardList, Shirt, Camera];
+---
+
+<Layout title="Planning tools — Alder House">
+  <section class="page-intro wrap tools-intro">
+    <p class="eyebrow">A LITTLE HELP GETTING STARTED</p>
+    <h1>
+      Your ideas.
+      <br />
+      <em>A clearer plan.</em>
+    </h1>
+    <p class="lead">
+      You don’t need to have it all figured out. Start with a session that feels
+      right, then make a little room for the details.
+    </p>
+  </section>
+  <div class="tool-directory wrap">
+    <div class="tool-directory-heading">
+      <div>
+        <p class="eyebrow">SIX WAYS TO FEEL READY</p>
+        <h2>What would help you today?</h2>
+      </div>
+      <p>Start anywhere. No account, no booking, no pressure.</p>
+    </div>
+    <div
+      class="tool-filters"
+      role="group"
+      aria-label="Filter planning tools"
+      hidden
+    >
+      {[
+        "All tools",
+        "Getting started",
+        "Session preparation",
+        "For businesses",
+      ].map((label) => (
+        <button
+          type="button"
+          data-filter={label}
+          aria-pressed={label === "All tools" ? "true" : "false"}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+    <p id="tool-count" class="small" role="status">
+      6 tools to explore
+    </p>
+  </div>
+  <section class="planning-library wrap" aria-label="Planning tools">
+    {toolCatalog.map((tool, index) => {
+      const Icon = icons[index];
+      return (
+        <article data-tool-category={tool.category}>
+          <Icon size={32} aria-hidden="true" />
+          <p class="eyebrow">
+            {tool.category} · {tool.time}
+          </p>
+          <h2>{tool.title}</h2>
+          <p>{tool.text}</p>
+          <a class="button" href={`/tools/${tool.slug}/`}>
+            {tool.action}
+          </a>
+        </article>
+      );
+    })}
+  </section>
+  <section class="inline-invitation wrap">
+    <div>
+      <h2>Prefer to talk it through?</h2>
+      <p>
+        These tools are optional. A few ideas are enough to begin a
+        conversation.
+      </p>
+    </div>
+    <a class="button" href="/inquire/">
+      Start with a conversation
+    </a>
+  </section>
+  <script>
+    const filters = document.querySelector<HTMLElement>(".tool-filters")!;
+    filters.hidden = false;
+    filters.querySelectorAll("button").forEach((button) =>
+      button.addEventListener("click", () => {
+        filters
+          .querySelectorAll("button")
+          .forEach((item) =>
+            item.setAttribute("aria-pressed", String(item === button)),
+          );
+        document
+          .querySelectorAll<HTMLElement>("[data-tool-category]")
+          .forEach((card) => {
+            card.hidden =
+              button.dataset.filter !== "All tools" &&
+              card.dataset.toolCategory !== button.dataset.filter;
+          });
+        const count = document.querySelectorAll(
+          "[data-tool-category]:not([hidden])",
+        ).length;
+        document.querySelector("#tool-count")!.textContent =
+          `${count} ${count === 1 ? "tool" : "tools"} to explore`;
+      }),
+    );
+  </script>
+</Layout>

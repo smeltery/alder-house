@@ -1,0 +1,41 @@
+---
+import { Check, ChevronDown } from "lucide-astro";
+import { toolGuides } from "../lib/tool-guides";
+interface Props {
+  slug: keyof typeof toolGuides;
+}
+const guide = toolGuides[Astro.props.slug];
+---
+
+<section class="tool-guidance" id="using-this-tool">
+  <div class="wrap">
+    <div class="tool-guide-heading">
+      <p class="eyebrow">MAKE THE MOST OF YOUR PLAN</p>
+      <h2>{guide.title}</h2>
+      <p>{guide.intro}</p>
+    </div>
+    <div class="tool-guide-steps">
+      {guide.steps.map(([title, text], index) => (
+        <article>
+          <span class="eyebrow">0{index + 1}</span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </article>
+      ))}
+    </div>
+    <aside class="tool-example">
+      <Check size={24} aria-hidden="true" />
+      <div>
+        <h3>A starting point in practice</h3>
+        <p>{guide.example}</p>
+      </div>
+    </aside>
+    <details class="tool-question">
+      <summary>
+        {guide.question}
+        <ChevronDown size={18} aria-hidden="true" />
+      </summary>
+      <p>{guide.answer}</p>
+    </details>
+  </div>
+</section>

@@ -1,0 +1,93 @@
+---
+import { ChevronLeft } from "lucide-astro";
+import Layout from "../../layouts/Layout.astro";
+import SessionGallery from "../../components/SessionGallery.astro";
+import Closing from "../../components/Closing.astro";
+import { getContent } from "../../lib/content";
+export async function getStaticPaths() {
+  const { albums } = await getContent();
+  return albums.map((album, index) => ({
+    params: { slug: album.slug },
+    props: {
+      album,
+      next: albums.length > 1 ? albums[(index + 1) % albums.length] : null,
+    },
+  }));
+}
+const { album, next } = Astro.props;
+const categorySessions: Record<string, string> = {
+  families: "families",
+  couples: "families",
+  portraits: "portraits",
+  brands: "brands",
+  weddings: "celebrations",
+  celebrations: "celebrations",
+};
+const params = new URLSearchParams({ inspiration: album.title });
+const session = categorySessions[album.category.toLowerCase().trim()];
+if (session) params.set("session", session);
+const inquiry = `/inquire/?${params}`;
+---
+
+<Layout
+  inquiry={inquiry}
+  title={`${album.title} — Alder House`}
+  description={album.description}
+>
+  <section class="page-intro wrap">
+    <a class="back-link" href="/work/">
+      <ChevronLeft size={16} aria-hidden="true" /> Back to portfolio
+    </a>
+    <p class="eyebrow">
+      {album.category} · {album.location}
+    </p>
+    <h1>{album.title}</h1>
+    <p class="lead">{album.description}</p>
+    <a class="button" href="#photographs">
+      Browse all {album.images.length} photographs
+    </a>
+    {!import.meta.env.PUBLIC_SANITY_PROJECT_ID && (
+      <p class="small">
+        An illustrative collection from multiple stock shoots, not a single
+        client session. <a href="/credits/">Photography credits</a>.
+      </p>
+    )}
+  </section>
+  <SessionGallery images={album.images} title={album.title} />
+  <section class="detail-section wrap">
+    <div>
+      <p class="eyebrow">FROM INSPIRATION TO YOUR OWN STORY</p>
+      <h2>
+        Take the feeling.
+        <br />
+        <em>Make it yours.</em>
+      </h2>
+    </div>
+    <div>
+      <p>
+        This sample collection is a starting point, not a template you need to
+        fit. Tell us which expressions, colors, or details resonate, and what
+        you would change for your own photographs.
+      </p>
+      <p>
+        Your people, location, styling, and intended image use would shape the
+        plan. Every photograph here illustrates the concept studio rather than a
+        client commission.
+      </p>
+      <a class="button" href={inquiry}>
+        Plan a session of your own
+      </a>
+    </div>
+  </section>
+  <nav class="story-navigation wrap" aria-label="More stories">
+    <a class="back-link" href="/work/">
+      Back to all stories
+    </a>
+    {next && (
+      <a class="button" href={`/work/${next.slug}/`}>
+        Next story: {next.title}
+      </a>
+    )}
+  </nav>
+  <Closing inquiry={inquiry} />
+</Layout>

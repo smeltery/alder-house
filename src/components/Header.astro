@@ -1,0 +1,214 @@
+---
+interface Props {
+  inquiry?: string;
+}
+const { inquiry = "/inquire/" } = Astro.props;
+import "../styles/mobile-menu.css";
+import {
+  Images,
+  Compass,
+  Search,
+  UserRound,
+  Camera,
+  MessageCircle,
+  Menu,
+  X,
+} from "lucide-astro";
+const links = [
+  {
+    href: "/tools/",
+    label: "Planning tools",
+    detail: "Find your fit and shape your session",
+    icon: Compass,
+  },
+  {
+    href: "/work/",
+    label: "Portfolio",
+    detail: "People, places & everyday stories",
+    icon: Images,
+  },
+  {
+    href: "/experience/",
+    label: "Sessions",
+    detail: "Find the right fit for your story",
+    icon: Camera,
+  },
+  {
+    href: "/about/",
+    label: "The studio",
+    detail: "Our perspective, your personality",
+    icon: UserRound,
+  },
+];
+const current = (href: string) =>
+  Astro.url.pathname.startsWith(href) ||
+  (href === "/experience/" && Astro.url.pathname.startsWith("/sessions/"))
+    ? ("page" as const)
+    : undefined;
+---
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Alder House home">
+      <img
+        class="brand-seal"
+        src="/brand/mark.svg"
+        width="48"
+        height="58"
+        alt=""
+      />
+      <span class="wordmark">
+        alder house<span>PHOTOGRAPHY STUDIO</span>
+      </span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {links.map((link) => (
+        <a href={link.href} aria-current={current(link.href)}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <div class="header-actions">
+      <button
+        id="search-trigger"
+        type="button"
+        aria-label="Search site"
+        aria-haspopup="dialog"
+        aria-controls="site-search"
+        hidden
+      >
+        <Search size={18} aria-hidden="true" />
+        <kbd>⌘K</kbd>
+      </button>
+      <a class="button header-cta" href={inquiry}>
+        <MessageCircle size={17} aria-hidden="true" /> Plan your session
+      </a>
+    </div>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-haspopup="dialog"
+      hidden
+    >
+      <Menu size={22} aria-hidden="true" />
+      <span>Menu</span>
+    </button>
+  </div>
+</header>
+<dialog id="mobile-nav" aria-label="Main menu">
+  <div class="menu-heading">
+    <a class="wordmark" href="/">
+      alder house<span>PHOTOGRAPHY STUDIO</span>
+    </a>
+    <button class="menu-close" type="button" aria-label="Close menu" autofocus>
+      <X size={24} aria-hidden="true" />
+    </button>
+  </div>
+  <p class="menu-intro">
+    A little more life.
+    <br />
+    <em>A little more you.</em>
+  </p>
+  <nav aria-label="Mobile navigation">
+    {links.map((link) => (
+      <a href={link.href} aria-current={current(link.href)}>
+        <link.icon size={22} aria-hidden="true" />
+        <span>
+          {link.label}
+          <small>{link.detail}</small>
+        </span>
+      </a>
+    ))}
+  </nav>
+  <div class="menu-contact">
+    <a class="button" href={inquiry}>
+      <MessageCircle size={18} aria-hidden="true" /> Plan your session
+    </a>
+    <p>Portraits · Families · Brands · Celebrations</p>
+  </div>
+  <section class="menu-planning" aria-labelledby="menu-planning-title">
+    <p class="eyebrow" id="menu-planning-title">
+      A LITTLE HELP GETTING STARTED
+    </p>
+    <a href="/tools/session-finder/">
+      <Compass size={18} aria-hidden="true" />
+      <span>
+        Find your session<small>Find the experience that fits</small>
+      </span>
+    </a>
+    <a href="/tools/wardrobe-guide/">
+      <Camera size={18} aria-hidden="true" />
+      <span>
+        Prepare for your photographs
+        <small>Outfits, palettes, and practical tips</small>
+      </span>
+    </a>
+  </section>
+  <div class="menu-signature">
+    <img src="/brand/stamp.svg" width="104" height="104" alt="" />
+    <p>
+      Good company. Beautiful light.
+      <br />
+      Photographs worth keeping.
+    </p>
+    <a class="text-link" href="/work/">
+      Find a little inspiration
+    </a>
+  </div>
+  <div class="menu-bottom">
+    <span>A smeltery concept studio</span>
+    <a href="/privacy/">Privacy</a>
+  </div>
+</dialog>
+<script>
+  const trigger = document.querySelector<HTMLButtonElement>(".menu-toggle")!;
+  const dialog = document.querySelector<HTMLDialogElement>("#mobile-nav")!;
+  trigger.hidden = false;
+  trigger.addEventListener("click", () => {
+    dialog.showModal();
+    trigger.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  });
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key !== "Tab") return;
+    const targets = [
+      ...dialog.querySelectorAll<HTMLElement>("a[href], button"),
+    ];
+    const first = targets[0];
+    const last = targets[targets.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+  dialog.addEventListener("close", () => {
+    trigger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    trigger.focus();
+  });
+  dialog
+    .querySelector(".menu-close")!
+    .addEventListener("click", () => dialog.close());
+  dialog
+    .querySelectorAll("a")
+    .forEach((link) => link.addEventListener("click", () => dialog.close()));
+  dialog.addEventListener("click", (event) => {
+    const bounds = dialog.getBoundingClientRect();
+    if (
+      event.target === dialog &&
+      (event.clientX < bounds.left ||
+        event.clientX > bounds.right ||
+        event.clientY < bounds.top ||
+        event.clientY > bounds.bottom)
+    )
+      dialog.close();
+  });
+  matchMedia("(min-width: 901px)").addEventListener("change", (event) => {
+    if (event.matches && dialog.open) dialog.close();
+  });
+</script>
