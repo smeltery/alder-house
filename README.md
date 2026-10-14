@@ -1,4 +1,4 @@
-# <picture><source media="(prefers-color-scheme: dark)" srcset="public/brand/mark-light.svg"><img src="public/brand/mark.svg" width="48" alt=""></picture> Alder House
+# Alder House
 
 [![ci](https://github.com/smeltery/alder-house/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/alder-house/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/smeltery/alder-house)](https://github.com/smeltery/alder-house/releases)
