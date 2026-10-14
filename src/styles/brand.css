@@ -3,12 +3,15 @@
   align-items: center;
   gap: 6px;
   margin-bottom: 24px;
-  padding-block: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   font-size: 13px;
   text-decoration: none;
 }
 .back-link:hover {
-  color: var(--muted);
+  background: #e9ece2;
+  color: var(--ink);
 }
 .hero-photo {
   position: relative;
