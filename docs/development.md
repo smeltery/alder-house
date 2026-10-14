@@ -43,7 +43,7 @@ commit. Nothing auto-stages or rewrites your changes.
 
 ## Keep the project lean
 
-`scripts/budgets.json` enforces a total of 8,150 authored lines, a default 250-line
+`scripts/budgets.json` enforces a total of 8,500 authored lines, a default 250-line
 file limit, and 15 files per directory. Page CSS allows 650 lines; navigation/footer CSS allows 300, editorial/form CSS 400. The expanded budget covers session
 routes, brand resources, the detailed form, and distinct portfolio, sessions, and
 studio layouts, and the accessible gallery viewer with its photo credits and tests.

@@ -12,3 +12,5 @@ stories and exploring an inquiry without sending or retaining personal details.
 - [Planning tools and search](planning-tools.md)
 
 - [Vercel hosting](vercel.md): previews, production, and environment variables.
+
+- [Search and agent discovery](discovery.md): Markdown, metadata, and sitemap.

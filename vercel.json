@@ -4,5 +4,12 @@
   "installCommand": "bun install --frozen-lockfile",
   "buildCommand": "bun run build",
   "outputDirectory": "dist",
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/contact/",
+      "destination": "/inquire/",
+      "permanent": true
+    }
+  ]
 }

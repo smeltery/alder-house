@@ -20,6 +20,20 @@ const {
   title = "Alder House — Portrait & Lifestyle Photography",
   description = "An imagined photography studio for portraits, families, personal brands, and life’s celebrations.",
 } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const identity = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Alder House",
+  description:
+    "A fictional photography studio website demonstration by smeltery. No bookings or inquiry submissions are accepted.",
+  url: Astro.site?.href,
+  creator: {
+    "@type": "Organization",
+    name: "smeltery",
+    url: "https://github.com/smeltery",
+  },
+};
 ---
 
 <!doctype html>
@@ -29,6 +43,14 @@ const {
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="is-agentic-site-type" content="business" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical.href} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(identity).replaceAll("<", "\\u003c")}
+    />
     <meta name="theme-color" content="#343d30" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
