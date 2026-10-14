@@ -232,3 +232,7 @@
 .featured-story .eyebrow {
   color: #fff;
 }
+.session-cards #celebrations img {
+  aspect-ratio: 1.7;
+  object-position: center 70%;
+}
