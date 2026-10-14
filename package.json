@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev --host 127.0.0.1 --port 4398",
+    "dev": "astro dev --host 127.0.0.1 --port 4398 --ignore-lock",
     "build": "astro build && bun scripts/discovery.ts",
-    "preview": "astro preview --host 127.0.0.1",
+    "preview": "astro preview --host 127.0.0.1 --ignore-lock",
     "studio": "sanity dev --port 3333",
     "studio:build": "sanity build dist/studio --yes",
     "check": "prettier --check . && markdownlint-cli2 && bun scripts/validate.ts && astro check && tsc --noEmit",
@@ -40,7 +40,7 @@
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "1.1.1",
     "turndown": "^7.2.4",
-    "typescript": "^7.0.2"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": "24.x"
