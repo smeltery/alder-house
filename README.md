@@ -1,4 +1,4 @@
-# Alder House
+# <picture><source media="(prefers-color-scheme: dark)" srcset="public/brand/mark-light.svg"><img src="public/brand/mark.svg" width="48" alt=""></picture> Alder House
 
 [![ci](https://github.com/smeltery/alder-house/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/alder-house/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/smeltery/alder-house)](https://github.com/smeltery/alder-house/releases)
@@ -9,11 +9,14 @@
 [![Vercel](https://img.shields.io/badge/Vercel-static-black?logo=vercel)](docs/vercel.md)
 [![License](https://img.shields.io/badge/license-PolyForm_Shield-blue)](LICENSE)
 
-An editorial photography website for a fictional studio. Explore portraits, families,
-personal brands, and celebrations, and a demo inquiry flow through an original ivory
-and olive design, with six planning tools and keyboard search. Astro generates the
-site; Sanity manages portfolio stories and
-studio copy. No booking, payment, or inquiry data is collected.
+[Visit the website](https://alder-house.vercel.app) · [Planning tools](https://alder-house.vercel.app/tools/)
+
+A fictional photography studio for portraits, families, brands, and celebrations.
+Astro serves the editorial site, six planning tools, and keyboard search; Sanity
+manages portfolio stories and studio copy. The demo inquiry sends no personal data.
+Vercel hosts the site and deploys pushes to `main`.
+
+![Alder House social preview](public/brand/og-image.png)
 
 ```sh
 flox activate
